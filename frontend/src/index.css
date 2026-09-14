@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body text-ink antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-petrol-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-petrol-800 text-white px-4 py-2.5 rounded-lg font-medium text-sm hover:bg-petrol-700 active:bg-petrol-900 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-white text-petrol-900 border border-petrol-900/15 px-4 py-2.5 rounded-lg font-medium text-sm hover:bg-petrol-50 transition-colors disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 bg-white text-danger-700 border border-danger-600/25 px-4 py-2.5 rounded-lg font-medium text-sm hover:bg-danger-100 transition-colors;
+  }
+  .btn-icon {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-md text-petrol-900/50 hover:bg-petrol-100 hover:text-petrol-900 transition-colors;
+  }
+  .input-field {
+    @apply w-full rounded-lg border border-petrol-900/15 bg-white px-3 py-2.5 text-sm text-ink placeholder:text-petrol-900/30 focus:outline-none focus:ring-2 focus:ring-petrol-500/40 focus:border-petrol-500 transition-shadow;
+  }
+  .label-field {
+    @apply block text-xs font-semibold uppercase tracking-wide text-petrol-900/50 mb-1.5;
+  }
+  .card {
+    @apply bg-white rounded-xl border border-petrol-900/10 shadow-card;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full;
+  }
+  .badge-success { @apply bg-success-100 text-success-700; }
+  .badge-danger { @apply bg-danger-100 text-danger-700; }
+  .badge-warning { @apply bg-stamp-100 text-stamp-700; }
+  .badge-neutral { @apply bg-petrol-100 text-petrol-700; }
+  /* Sello fiscal: caja de número de control, como en una factura venezolana real */
+  .fiscal-stamp {
+    @apply inline-flex flex-col items-start border-2 border-tech-cyan rounded-lg px-3 py-1.5 bg-tech-cyan/10;
+  }
+  .fiscal-stamp .label {
+    @apply text-[10px] uppercase tracking-widest text-tech-cyan font-semibold;
+  }
+  .fiscal-stamp .value {
+    @apply font-mono text-sm text-tech-cyan font-semibold tabular-nums;
+  }
+}
