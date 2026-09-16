@@ -17,11 +17,13 @@ const supplierRoutes = require('./routes/supplierRoutes');
 const purchaseOrderRoutes = require('./routes/purchaseOrderRoutes');
 const payableRoutes = require('./routes/payableRoutes');
 const receivableRoutes = require('./routes/receivableRoutes');
+const moduleRoutes = require('./routes/moduleRoutes');
 
 const app = express();
 
 app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 app.use(express.json());
+app.use('/api/modules', moduleRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
@@ -43,6 +45,7 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 4000;
+
 app.listen(PORT, () => {
-  console.log(`API escuchando en http://localhost:${PORT}`);
+  console.log(`API escuchando en el puerto ${PORT}`);
 });
