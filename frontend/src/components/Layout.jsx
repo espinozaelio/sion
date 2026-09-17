@@ -5,6 +5,7 @@ import {
   Menu, X, LogOut, Truck, ClipboardList, Landmark, Wallet, UserCog,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useModules } from '../context/ModulesContext';
 
 const navItems = [
   { to: '/', label: 'Panel', Icon: LayoutDashboard },
@@ -12,10 +13,10 @@ const navItems = [
   { to: '/facturas', label: 'Facturas', Icon: Receipt },
   { to: '/inventario', label: 'Inventario', Icon: Package },
   { to: '/clientes', label: 'Clientes', Icon: Users },
-  { to: '/proveedores', label: 'Proveedores', Icon: Truck },
-  { to: '/compras', label: 'Compras', Icon: ClipboardList },
-  { to: '/cuentas-por-pagar', label: 'Cuentas por pagar', Icon: Landmark },
-  { to: '/cuentas-por-cobrar', label: 'Cuentas por cobrar', Icon: Wallet },
+  { to: '/proveedores', label: 'Proveedores', Icon: Truck, moduleKey: 'proveedores' },
+  { to: '/compras', label: 'Compras', Icon: ClipboardList, moduleKey: 'compras' },
+  { to: '/cuentas-por-pagar', label: 'Cuentas por pagar', Icon: Landmark, moduleKey: 'cuentas_por_pagar'  },
+  { to: '/cuentas-por-cobrar', label: 'Cuentas por cobrar', Icon: Wallet, moduleKey: 'cuentas_por_cobrar' },
   { to: '/usuarios', label: 'Usuarios', Icon: UserCog, adminOnly: true },
   { to: '/configuracion', label: 'Configuración fiscal', Icon: SettingsIcon, adminOnly: true },
 ];
@@ -31,6 +32,7 @@ function initials(name = '') {
 
 export default function Layout({ children }) {
   const { user, logout } = useAuth();
+  const { isEnabled } = useModules();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -61,7 +63,7 @@ export default function Layout({ children }) {
       {/* Opciones: mismo color de fondo del login (sin efecto), iconos en cian (color de la "S") */}
       <nav className="flex-1 px-3 py-4 space-y-1 bg-tech-bg">
         {navItems
-          .filter((item) => !item.adminOnly || user?.role === 'admin')
+          .filter((item) => (!item.adminOnly || user?.role === 'admin') && (!item.moduleKey || isEnabled(item.moduleKey)))
           .map(({ to, label, Icon }) => (
             <NavLink
               key={to}

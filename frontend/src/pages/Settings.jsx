@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RefreshCw, Save, Info, Settings as SettingsIcon } from 'lucide-react';
+import ModuleToggles from '../components/ModuleToggles';
 import api from '../api/client';
 
 export default function Settings() {
@@ -40,7 +41,9 @@ export default function Settings() {
       setRefreshing(false);
     }
   };
+ 
 
+  
   if (!form) return <p className="text-petrol-900/50 text-sm">Cargando configuración...</p>;
 
   return (
@@ -156,6 +159,8 @@ export default function Settings() {
           sistema con un proveedor certificado por el SENIAT según tu tipo de contribuyente.
         </p>
       </div>
+      <ModuleToggles />
     </div>
+    
   );
 }
